@@ -12,4 +12,5 @@ public class Shape implements Serializable{
 	{return false;}
 	public void Resize(int n){};
 	public void Resize(int x,int y){};
+        public String type = "";
 }

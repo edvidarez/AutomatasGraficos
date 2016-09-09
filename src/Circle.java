@@ -1,11 +1,16 @@
 import java.awt.Color;
 import java.awt.Graphics;
 public class Circle extends Shape {
-
-	private static final long serialVersionUID = 1L;
+private static final long serialVersionUID = 1L;
 public int r;
+public String label;
+Circle()
+{
+   type = "circle";
+}
+
 public void Draw(Graphics c,boolean isActive,boolean onRotation){
-	
+	 
 	if(isActive==true)
 	{
 		c.setColor(Color.blue);
@@ -14,6 +19,7 @@ public void Draw(Graphics c,boolean isActive,boolean onRotation){
 	else
 		c.setColor(Color.black);
 	c.drawOval(x0-r, y0-r, 2*r, 2*r);
+        c.drawString(label, x0-7, y0+6);
 }
 public void Move(int x, int y){
 	x0=x;

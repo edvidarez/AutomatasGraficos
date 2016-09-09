@@ -13,7 +13,17 @@ public void Draw(Graphics c,boolean isActive,boolean onRotation){
 	}
 	else
 		c.setColor(Color.black);
+        
+       // c.drawArc(x0,  y0, (int)Math.sqrt((x0*x0)+(x1*x1)),  (int)Math.sqrt((y0*y0)+(y1*y1)),  45,  45);
+     //  c.drawArc(x0, y0, 400, 150, 0, 180);
+  //    c.setColor(Color.cyan);
+ //   c.fillArc(x1, y1, 150, 100, 0, 180);
+  //  c.setColor(Color.black);
+  //  c.drawArc(x0, y1, 150, (int) Math.sqrt((y1-y0)*(y1-y0)), 0, -180  );
 	c.drawLine(x0,y0,x1,y1);
+      //  System.out.println("c.drawArc("+x0+","+  y0 +","+ 100+","+  (y1-y0)+","+  45 +","+  45 +");");
+      System.out.println("y: "+ (int)Math.sqrt((y0*y0)+(y1*y1)));
+      System.out.println("y0:"+y0+"   y1:"+y1);
 }
 public void Move(int x,int y){
 	int dx,dy;
