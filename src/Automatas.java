@@ -91,17 +91,23 @@ public void paint(Graphics g){
                         if(esperandoClick)
                         {
                             System.out.println("linea entre estados");
-                            esperandoClick = false;
-                            Line l=new Line();
-                            l.x0=ActiveShape.x0;
-                            l.y0=ActiveShape.y0;
-                            l.x1=S.x0;
-                            l.y1=S.y0;
+                            esperandoClick = false; 
+                            if(S==ActiveShape)
+                            {
+                                 AristaRetorno ar = new AristaRetorno(ActiveShape); 
+                                 Document.add(ar);
+                            }
+                            else
+                            {
+                            Arista l = new Arista(ActiveShape,S);
+                              Document.add(l);
+                            }
                             if(ActiveShape!=null)
 				ActiveShape.isActive=false;
                             ActiveShape=null;
-                             Document.add(l);
-                            continue;
+                           
+                            
+                            break;
                         }
                             
 				if(ActiveShape!=null)

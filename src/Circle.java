@@ -18,7 +18,9 @@ public void Draw(Graphics c,boolean isActive,boolean onRotation){
 	}
 	else
 		c.setColor(Color.black);
+       
 	c.drawOval(x0-r, y0-r, 2*r, 2*r);
+        
         c.drawString(label, x0-7, y0+6);
 }
 public void Move(int x, int y){
