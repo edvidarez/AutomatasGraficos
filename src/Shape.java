@@ -13,4 +13,6 @@ public class Shape implements Serializable{
 	public void Resize(int n){};
 	public void Resize(int x,int y){};
         public String type = "";
+        public boolean estadoinicial= false;
+        public boolean estadofinal= false;
 }

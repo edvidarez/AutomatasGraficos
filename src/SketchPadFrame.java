@@ -125,7 +125,7 @@ public void paint(Graphics g){
 		switch(e.getKeyCode())
 		{
 		case 83:
-	          if( JOptionPane.showConfirmDialog(rootPane, "¿Desea guardar este documento?")==JOptionPane.OK_OPTION)
+	          if( JOptionPane.showConfirmDialog(rootPane, "Desea guardar este documento?")==JOptionPane.OK_OPTION)
 	          {
 	        	  
 	               File=JOptionPane.showInputDialog("ponle un nombre:");
@@ -200,7 +200,7 @@ public void paint(Graphics g){
 			}
 			break;
 		case 27:
-			if(JOptionPane.showConfirmDialog(rootPane, "¿Quieres borrar todo?")==JOptionPane.OK_OPTION)
+			if(JOptionPane.showConfirmDialog(rootPane, "Quieres borrar todo?")==JOptionPane.OK_OPTION)
 			{
 				Document.clear();
 				

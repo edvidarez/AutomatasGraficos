@@ -35,9 +35,10 @@ implements MouseListener, MouseMotionListener,KeyListener{
      ObjectOutputStream ObjectOptS;
 	public Automatas()
 	{
-	setTitle("The SketchPad 2D");
-	setSize(1280,720);
+	setTitle("Automatas Deterministas 2D");
+	setSize(800,800);
 	addMouseListener(this);
+        setLocationRelativeTo(null);
 	addMouseMotionListener(this);
 	addKeyListener(this);
 	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -49,6 +50,7 @@ implements MouseListener, MouseMotionListener,KeyListener{
 
 	
 public void paint(Graphics g){
+     JButton okButton = new JButton("OK");     
 	super.paint(g);
 	Dimension height = getSize();
 	if(logo)
@@ -64,7 +66,7 @@ public void paint(Graphics g){
 		repaint();
 }
 
-	public void mouseDragged(MouseEvent e) {
+public void mouseDragged(MouseEvent e) {
 		if(bDragging){
 			if(ActiveShape!=null)
 			ActiveShape.isActive=false;
@@ -76,12 +78,14 @@ public void paint(Graphics g){
 		
 	}
 
-	public void mouseMoved(MouseEvent e) {
+
+
+public void mouseMoved(MouseEvent e) {
 		lastX=e.getX();
 		lastY=e.getY();
 	}
 
-	public void mouseClicked(MouseEvent e) {
+public void mouseClicked(MouseEvent e) {
 		int i=0;
 		boolean flag=false;
 		for(Shape S:Document){
@@ -92,15 +96,19 @@ public void paint(Graphics g){
                         {
                             System.out.println("linea entre estados");
                             esperandoClick = false; 
+                           String simbol = JOptionPane.showInputDialog("Ingresa el simbolo o simbolos separados por coma(sin espacios)");
                             if(S==ActiveShape)
                             {
-                                 AristaRetorno ar = new AristaRetorno(ActiveShape); 
+                                 AristaRetorno ar = new AristaRetorno(ActiveShape,simbol); 
                                  Document.add(ar);
                             }
                             else
                             {
-                            Arista l = new Arista(ActiveShape,S);
-                              Document.add(l);
+                                if(ActiveShape!=null)
+                                {
+                                Arista l = new Arista(ActiveShape,S,simbol);
+                                Document.add(l);
+                                }
                             }
                             if(ActiveShape!=null)
 				ActiveShape.isActive=false;
@@ -126,7 +134,7 @@ public void paint(Graphics g){
 		ActiveShape=null;
 		repaint();
 		}
-	}
+}
 
 	public void mouseEntered(MouseEvent arg0) {
 		

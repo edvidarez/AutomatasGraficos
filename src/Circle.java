@@ -18,6 +18,16 @@ public void Draw(Graphics c,boolean isActive,boolean onRotation){
 	}
 	else
 		c.setColor(Color.black);
+       if(this.estadofinal)
+       {
+         c.drawOval(x0-(r-5), y0-(r-5), 2*(r-5), 2*(r-5));
+       }
+       if(this.estadoinicial)
+       {
+           c.drawLine(x0-2*r, y0-r, x0-r, y0);
+           c.drawLine(x0-2*r, y0+r, x0-r, y0);
+           c.drawLine(x0-2*r, y0-r, x0-2*r, y0+r);
+       }
        
 	c.drawOval(x0-r, y0-r, 2*r, 2*r);
         

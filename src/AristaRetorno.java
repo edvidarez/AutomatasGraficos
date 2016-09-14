@@ -16,11 +16,13 @@ public int y1;
 public Shape ini;
 public Shape fin;
 public int r =25;
-AristaRetorno(Shape ini)
+public String a = "String";
+AristaRetorno(Shape ini,String a)
 {   
     this.ini = ini;
     x0=this.ini.x0;
     y0= this.ini.y0-50;
+    this.a=a;
    
     
 }
@@ -77,7 +79,9 @@ public void Draw(Graphics c,boolean isActive,boolean onRotation){
         }
           c.drawLine(x0+r,y0,ini.x0+difx*direcx,ini.y0-dify*direcx);
           drawArrowLine(c,x0-r,y0,ini.x0-difx*direcx,ini.y0-dify*direcx,15,5);
-  
+          
+        
+        c.drawString(a, x0-(2*a.length()), y0-26);
        }
 public void Move(int x, int y){
 	x0=x;

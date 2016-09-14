@@ -9,14 +9,15 @@
  * @author Edmundo
  */
 import java.awt.*;
+import java.awt.geom.AffineTransform;
 public class Arista extends Shape {
 private static final long serialVersionUID = 1L;
 public int x1;
 public int y1;
 public Shape ini;
 public Shape fin;
-
-Arista(Shape ini,Shape fin)
+public  String a = "String";
+Arista(Shape ini,Shape fin,String a)
 {   
     this.ini = ini;
     this.fin = fin;
@@ -24,6 +25,7 @@ Arista(Shape ini,Shape fin)
     y0= this.ini.y0;
     x1= this.fin.x0;
     y1=this.fin.y0;
+    this.a=a;
     
 }
  private void drawArrowLine(Graphics g, int x1, int y1, int x2, int y2, int d, int h){
@@ -47,11 +49,14 @@ Arista(Shape ini,Shape fin)
         g.fillPolygon(xpoints, ypoints, 3);
      }
 public void Draw(Graphics c,boolean isActive,boolean onRotation){
-	
+	 x0=this.ini.x0;
+        y0= this.ini.y0;
+        x1= this.fin.x0;
+        y1=this.fin.y0;
 	if(isActive==true)
 	{
 		c.setColor(Color.blue);
-		c.fillOval(x0-3, y0-3, 6, 6);
+		
 	}
 	else
 		c.setColor(Color.black);
@@ -90,14 +95,55 @@ public void Draw(Graphics c,boolean isActive,boolean onRotation){
 //        {
 //            direcy= 1;
 //        }
+
       //  c.drawArc(x0-25, y0-75,50, 50, 0, 180);
 	//c.drawLine(this.ini.x0+difx*direcx,this.ini.y0+dify*direcx,this.fin.x0-difx*direcx,this.fin.y0-dify*direcx);
         drawArrowLine(c, this.ini.x0+difx*direcx, this.ini.y0+dify*direcx, this.fin.x0-difx*direcx, this.fin.y0-dify*direcx, 15, 5);
-//        c.drawLine(     this.fin.x0-(2*difx)-dify   ,this.fin.y0 -(2*dify)+difx         ,this.fin.x0-difx,this.fin.y0-dify);
-//        c.drawLine(this.fin.x0-(2*difx)+dify,this.fin.y0-(2*dify)-difx          ,this.fin.x0-difx,this.fin.y0-dify);
-      //  System.out.println("c.drawArc("+x0+","+  y0 +","+ 100+","+  (y1-y0)+","+  45 +","+  45 +");");
-    //  System.out.println("y: "+ (int)Math.sqrt((y0*y0)+(y1*y1)));
-      //System.out.println("y0:"+y0+"   y1:"+y1);
+       
+        c.drawString(a, this.fin.x0-difx*direcx-(10*a.length()*direcx)-10, this.fin.y0-dify*direcx-5);
+        
+//        Graphics2D g2d = (Graphics2D) c;
+// 
+//        AffineTransform at = new AffineTransform();
+//        at.rotate(Math.PI / 2);
+//        g2d.setTransform(at);
+//        g2d.drawString("Hello World", -200, 50);
+//        g2d.setTransform(at);
+//        g2d.drawString("O", 400, 400);
+
+}
+public boolean HitTest(int x,int y)
+{
+	int dx=x1-x0;
+	int dy=y1-y0;
+	int adx=Math.abs(dx);
+	int ady=Math.abs(dy);
+	x-=x0;
+	y-=y0;
+	double nx,ny;
+            nx=dx/Math.sqrt(dx*dx+dy*dy);
+            ny=dy/Math.sqrt(dx*dx+dy*dy);
+            double p=nx*x+ny*y;
+            double px,py;
+            px=nx*p;
+            py=ny*p;
+            double rx=x-px;
+            double ry=y-py;
+            double r=Math.sqrt(rx*rx+ry*ry);
+            
+	if(r<5){
+                double u;
+                if(adx>ady){
+                    u=px/(double)dx;
+                }
+                else{
+                    u=py/(double)dy;
+                }
+                if(u>=0&&u<=1){
+                    return true;
+                }
+            }
+	return false;
 }
 //public void Move(int x,int y){
 //	int dx,dy;
