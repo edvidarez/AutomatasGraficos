@@ -48,7 +48,7 @@ Arista(Shape ini,Shape fin,String a)
         g.drawLine(x1, y1, x2, y2);
         g.fillPolygon(xpoints, ypoints, 3);
      }
-public void Draw(Graphics c,boolean isActive,boolean onRotation){
+public void Draw(Graphics c,boolean isActive,boolean onRotation,int total_caminos){
 	 x0=this.ini.x0;
         y0= this.ini.y0;
         x1= this.fin.x0;
@@ -76,7 +76,7 @@ public void Draw(Graphics c,boolean isActive,boolean onRotation){
         // double sin = dy/D, cos = dx/D;
         int difx = (int)(Math.cos(ang)*25);
         int dify = (int)(Math.sin(ang)*25);
-        System.out.println(ang);
+        //System.out.println(ang);
         int direcx,direcy ;
         direcx=direcy=1;
         if(this.ini.x0<this.fin.x0)

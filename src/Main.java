@@ -131,6 +131,61 @@ public class Main {
                         }
                     }
                 });
+                  JButton in = new JButton("Ingresar Palabra");
+                  in.addActionListener(new ActionListener() {
+                
+                    public void actionPerformed(ActionEvent e) {
+                       //revisar que el automata esta completamente lleno
+                       boolean error=false;
+                       int alfaSize= Pad.alfabeto.size();
+                       int estadosini=0;
+                       int estadosfin=0;
+                        for(Shape S:Pad.Document)
+                        {
+                            if(S.type=="circle")
+                            {
+                                if(S.caminos!=alfaSize)
+                                {
+                                   JOptionPane.showMessageDialog(Pad, "No esta completo el Autómata", "ERROR",JOptionPane.ERROR_MESSAGE);
+                                   error=true;
+                                }
+                                if(S.estadofinal)
+                                {
+                                    estadosfin++;
+                                }
+                                if(S.estadoinicial)
+                                {
+                                    estadosini++;
+                                }
+                            }
+                            
+                        }
+                        String palabra;
+                        if(estadosini==0)
+                        {
+                            error=true;
+                            JOptionPane.showMessageDialog(Pad, "No se definio un estado inicial", "ERROR",JOptionPane.ERROR_MESSAGE); 
+                        }
+                          if(estadosini>1)
+                        {
+                            error=true;
+                            JOptionPane.showMessageDialog(Pad, "No pueden existir dos estados iniciales", "ERROR",JOptionPane.ERROR_MESSAGE);
+                        }
+                        if(estadosfin==0)
+                        {
+                            error=true;
+                            JOptionPane.showMessageDialog(Pad, "No se definio un estado final", "ERROR",JOptionPane.ERROR_MESSAGE);        
+                        }
+                      
+                        
+                        if(!error &&estadosini==1 )
+                        {
+                            palabra = JOptionPane.showInputDialog("Ingresa la palabra:");
+                            
+                        }
+                       //revisar si el automata termino en un estado final
+                    }
+                });
 
                   Pad.setLayout(new GridLayout(2,1 ));
                   JPanel controlPanel = new JPanel();
@@ -140,6 +195,7 @@ public class Main {
                   controlPanel.add(estadofin);
                   controlPanel.add(arista);
                   controlPanel.add(delete);
+                  controlPanel.add(in);
                   Pad.add(controlPanel);
                   //Pad.pack();
                   Pad.setVisible(true);

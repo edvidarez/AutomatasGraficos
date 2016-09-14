@@ -9,9 +9,16 @@ Circle()
    type = "circle";
 }
 
-public void Draw(Graphics c,boolean isActive,boolean onRotation){
+public void Draw(Graphics c,boolean isActive,boolean onRotation,int total_caminos){
 	 
-	if(isActive==true)
+	if(caminos!=total_caminos)
+        {
+            c.setColor(Color.red);
+             if(isActive==true)
+            c.fillOval(x0-5, y0-5, 10, 10);
+        }
+        else            
+        if(isActive==true)
 	{
 		c.setColor(Color.blue);
 		c.fillOval(x0-5, y0-5, 10, 10);

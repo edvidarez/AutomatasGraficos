@@ -48,7 +48,7 @@ public void paint(Graphics g){
 	g.drawImage(img.getImage(), 0, 0, height.width, height.height, null);
 	}
 	for(Shape S:Document){
-		S.Draw(g,S.isActive,onRotation);
+		S.Draw(g,S.isActive,onRotation,0);
 	}
 	if(onRotation)
 		repaint();

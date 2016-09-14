@@ -46,7 +46,7 @@ AristaRetorno(Shape ini,String a)
         g.drawLine(x1, y1, x2, y2);
         g.fillPolygon(xpoints, ypoints, 3);
      }
-public void Draw(Graphics c,boolean isActive,boolean onRotation){
+public void Draw(Graphics c,boolean isActive,boolean onRotation,int caminos_totales){
 	
 	if(isActive==true)
 	{

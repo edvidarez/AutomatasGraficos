@@ -27,6 +27,7 @@ implements MouseListener, MouseMotionListener,KeyListener{
 	int Last2y;
         int count_circles=1;
 	String File;
+        ArrayList<String> alfabeto = new ArrayList<String>();
 	boolean onRotation=false,logo=false,esperandoClick=false;
 	static String archivo="Guardado";
 	 FileInputStream FileInS;
@@ -60,7 +61,7 @@ public void paint(Graphics g){
 	g.drawImage(img.getImage(), 0, 0, height.width, height.height, null);
 	}
 	for(Shape S:Document){
-		S.Draw(g,S.isActive,onRotation);
+		S.Draw(g,S.isActive,onRotation,alfabeto.size());
 	}
 	if(onRotation)
 		repaint();
@@ -84,7 +85,31 @@ public void mouseMoved(MouseEvent e) {
 		lastX=e.getX();
 		lastY=e.getY();
 	}
-
+public boolean isInAlfabet(String s)
+{
+    for(String a : alfabeto){
+        if( s.equals(a))
+        {
+            return true;
+        }
+    }
+    return false;
+}
+public boolean isInState(String s,Shape c)
+{
+     
+     for(int x=0;x<c.aristas.size();x++) 
+     {
+        System.out.println(c.aristas.get(x));
+        String a_split[] = c.aristas.get(x).split(",");
+        for(String a_s:a_split)
+        {
+            if(s.equals(a_s))
+                return true;
+        }
+    }
+    return false;
+}
 public void mouseClicked(MouseEvent e) {
 		int i=0;
 		boolean flag=false;
@@ -94,19 +119,52 @@ public void mouseClicked(MouseEvent e) {
                             
                         if(esperandoClick)
                         {
+                            boolean ERROR =false;
                             System.out.println("linea entre estados");
                             esperandoClick = false; 
                            String simbol = JOptionPane.showInputDialog("Ingresa el simbolo o simbolos separados por coma(sin espacios)");
-                            if(S==ActiveShape)
+                           String simbols[] = simbol.split(",");
+                           String finalLabel = "";
+                            for(String s : simbols){
+                                    if(!isInAlfabet(s))
+                                    {
+                                        alfabeto.add(s);
+                                        System.out.println("se añadio: "+s);
+                                    }
+                                    else
+                                    {
+                                        System.out.println(s+"Ya existe en el alfabeto");
+                                    }
+                                    if(!isInState(s,ActiveShape))
+                                    {
+                                        if(finalLabel.length()>0)
+                                        {
+                                            finalLabel+=",";
+                                        }
+                                        finalLabel+=s;
+                                        ActiveShape.caminos++;
+                                    }
+                                    else
+                                    {
+                                        System.out.println("Error se quiere agregar un mismo simbolo para dos distintos estados");
+                                        ERROR=true;
+                                        JOptionPane.showMessageDialog(rootPane, "Error se quiere agregar un mismo simbolo para dos distintos estados");
+                                    }
+                            }
+                            
+                            
+                            if(S==ActiveShape &&!ERROR)
                             {
-                                 AristaRetorno ar = new AristaRetorno(ActiveShape,simbol); 
+                                 AristaRetorno ar = new AristaRetorno(ActiveShape,finalLabel); 
+                                 ActiveShape.aristas.add(finalLabel);
                                  Document.add(ar);
                             }
                             else
                             {
-                                if(ActiveShape!=null)
+                                if(ActiveShape!=null &&!ERROR)
                                 {
-                                Arista l = new Arista(ActiveShape,S,simbol);
+                                Arista l = new Arista(ActiveShape,S,finalLabel);
+                                ActiveShape.aristas.add(finalLabel);
                                 Document.add(l);
                                 }
                             }
