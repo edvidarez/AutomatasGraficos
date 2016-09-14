@@ -157,6 +157,7 @@ public void mouseClicked(MouseEvent e) {
                             {
                                  AristaRetorno ar = new AristaRetorno(ActiveShape,finalLabel); 
                                  ActiveShape.aristas.add(finalLabel);
+                                 ActiveShape.aristas_shape.add(ar);
                                  Document.add(ar);
                             }
                             else
@@ -165,6 +166,7 @@ public void mouseClicked(MouseEvent e) {
                                 {
                                 Arista l = new Arista(ActiveShape,S,finalLabel);
                                 ActiveShape.aristas.add(finalLabel);
+                                 ActiveShape.aristas_shape.add(l);
                                 Document.add(l);
                                 }
                             }

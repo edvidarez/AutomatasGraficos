@@ -13,8 +13,6 @@ public class AristaRetorno extends Shape {
 private static final long serialVersionUID = 1L;
 public int x1;
 public int y1;
-public Shape ini;
-public Shape fin;
 public int r =25;
 public String a = "String";
 AristaRetorno(Shape ini,String a)

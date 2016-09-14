@@ -14,8 +14,7 @@ public class Arista extends Shape {
 private static final long serialVersionUID = 1L;
 public int x1;
 public int y1;
-public Shape ini;
-public Shape fin;
+
 public  String a = "String";
 Arista(Shape ini,Shape fin,String a)
 {   

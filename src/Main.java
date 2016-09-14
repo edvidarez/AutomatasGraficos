@@ -140,6 +140,7 @@ public class Main {
                        int alfaSize= Pad.alfabeto.size();
                        int estadosini=0;
                        int estadosfin=0;
+                       Shape estado_actual = null;
                         for(Shape S:Pad.Document)
                         {
                             if(S.type=="circle")
@@ -156,6 +157,7 @@ public class Main {
                                 if(S.estadoinicial)
                                 {
                                     estadosini++;
+                                    estado_actual = S;
                                 }
                             }
                             
@@ -163,6 +165,7 @@ public class Main {
                         String palabra;
                         if(estadosini==0)
                         {
+                           
                             error=true;
                             JOptionPane.showMessageDialog(Pad, "No se definio un estado inicial", "ERROR",JOptionPane.ERROR_MESSAGE); 
                         }
@@ -181,7 +184,46 @@ public class Main {
                         if(!error &&estadosini==1 )
                         {
                             palabra = JOptionPane.showInputDialog("Ingresa la palabra:");
-                            
+                            int i;
+                            boolean bandera1=false;
+                            for(i=0;i<palabra.length();i++)
+                            {
+                                
+                               for(int j=0;j<estado_actual.aristas.size();j++) 
+                               {
+                                   bandera1=false;
+                                    String a_split[] = estado_actual.aristas.get(j).split(",");
+                                    for(String a_s:a_split)
+                                    {
+                                        if(a_s.charAt(0)==(palabra.charAt(i)))
+                                        {
+                                            System.out.println("Cambio de estado");
+                                            bandera1=true;
+                                            break;
+                                        }
+                                        
+                                    }
+                                    if(bandera1)
+                                    {
+                                        if( estado_actual.aristas_shape.get(j).fin==null)
+                                        {
+                                             estado_actual=estado_actual.aristas_shape.get(j).ini;
+                                        }
+                                        else
+                                        estado_actual=estado_actual.aristas_shape.get(j).fin;
+                                        j=0;
+                                        break;
+                                    }
+                                    
+                                }
+                            }
+                            if(estado_actual.estadofinal)
+                            {
+                                JOptionPane.showMessageDialog(Pad,"Termina en un estado Final");
+                            }
+                            else{
+                                JOptionPane.showMessageDialog(Pad,"No termina en estado final", "Error", JOptionPane.ERROR_MESSAGE);
+                            }
                         }
                        //revisar si el automata termino en un estado final
                     }

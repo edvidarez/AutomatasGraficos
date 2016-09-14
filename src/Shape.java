@@ -17,6 +17,9 @@ public class Shape implements Serializable{
         public boolean estadoinicial= false;
         public boolean estadofinal= false;
         public ArrayList<String> aristas = new ArrayList<String>();
+        public ArrayList<Shape> aristas_shape = new ArrayList<Shape>();
         public String a;
         public int caminos=0;
+        public Shape ini;
+        public Shape fin;
 }
