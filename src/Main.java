@@ -1,19 +1,27 @@
 
+import java.applet.Applet;
+import java.awt.Checkbox;
+import java.awt.CheckboxGroup;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 
 
 public class Main {
-
+        public static JPanel cckbox ;
+        public static ButtonGroup group;
+        public static JRadioButton det,notdet;
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Automatas Pad=new Automatas();
+               // Pad.setDoubleBuffered(true);
              //   ejemplo e = new ejemplo();
 //		MATRIX4D a= new MATRIX4D(1,-2,-3,-1,0,1,2,0,0,2,3,1,3,-2,0,1);
 //		System.out.println(MATRIX4D.Det(a));
@@ -228,9 +236,17 @@ public class Main {
                        //revisar si el automata termino en un estado final
                     }
                 });
-
+                  JFrame mainFrame = new JFrame();
+                  mainFrame.setTitle("Automatas2D");
+                  mainFrame.setSize(900,800);
+                  mainFrame.setLocationRelativeTo(null);
+                  mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                  
+                  
+                 
                   Pad.setLayout(new GridLayout(2,1 ));
                   JPanel controlPanel = new JPanel();
+                  Pad.setDoubleBuffered(true);
                   controlPanel.setLayout(new FlowLayout());
                   controlPanel.add(okButton);
                   controlPanel.add(estadoini);
@@ -238,9 +254,37 @@ public class Main {
                   controlPanel.add(arista);
                   controlPanel.add(delete);
                   controlPanel.add(in);
+                  cckbox = new JPanel();
+                  cckbox.setLayout(new GridLayout(2,2));
+                  group = new ButtonGroup();
+                  det = new JRadioButton("Determinista");det.setSelected(true);
+                  notdet = new JRadioButton("No Determinista");
+                  
+                  
+                  det.addActionListener(new ActionListener() {
+                
+                    public void actionPerformed(ActionEvent e) {
+                        Pad.repaint();
+                        
+                    }
+                    });
+                  notdet.addActionListener(new ActionListener() {
+                
+                    public void actionPerformed(ActionEvent e) {
+                        Pad.repaint();
+                        
+                    }
+                    });
+                  group.add(det );
+                  group.add(notdet );
+                  cckbox.add(det);
+                  cckbox.add(notdet);
+                  controlPanel.add(cckbox);
                   Pad.add(controlPanel);
                   //Pad.pack();
-                  Pad.setVisible(true);
+                  
+                  mainFrame.add(Pad);
+                  mainFrame.setVisible(true); 
 		// JButton okButton = new JButton("OK");        
 	}
         

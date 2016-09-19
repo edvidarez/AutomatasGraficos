@@ -11,7 +11,7 @@ Circle()
 
 public void Draw(Graphics c,boolean isActive,boolean onRotation,int total_caminos){
 	 
-	if(caminos!=total_caminos)
+	if(caminos!=total_caminos && Main.det.isSelected())
         {
             c.setColor(Color.red);
              if(isActive==true)
@@ -23,6 +23,7 @@ public void Draw(Graphics c,boolean isActive,boolean onRotation,int total_camino
 		c.setColor(Color.blue);
 		c.fillOval(x0-5, y0-5, 10, 10);
 	}
+        
 	else
 		c.setColor(Color.black);
        if(this.estadofinal)
