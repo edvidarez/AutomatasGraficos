@@ -12,8 +12,8 @@ import java.awt.*;
 import java.awt.geom.AffineTransform;
 public class Arista extends Shape {
 private static final long serialVersionUID = 1L;
-public int x1;
-public int y1;
+public int x1,sx,fx;
+public int y1,sy,fy;
 
 public  String a = "String";
 Arista(Shape ini,Shape fin,String a)
@@ -60,12 +60,7 @@ public void Draw(Graphics c,boolean isActive,boolean onRotation,int total_camino
 	else
 		c.setColor(Color.black);
         
-       // c.drawArc(x0,  y0, (int)Math.sqrt((x0*x0)+(x1*x1)),  (int)Math.sqrt((y0*y0)+(y1*y1)),  45,  45);
-     //  c.drawArc(x0, y0, 400, 150, 0, 180);
-  //    c.setColor(Color.cyan);
- //   c.fillArc(x1, y1, 150, 100, 0, 180);
-  //  c.setColor(Color.black);
-  //  c.drawArc(x0, y1, 150, (int) Math.sqrt((y1-y0)*(y1-y0)), 0, -180  );
+    
   
         double dy =((double)this.fin.y0-(double)this.ini.y0);
         double dx =( (double)this.fin.x0-(double)this.ini.x0);
@@ -97,6 +92,10 @@ public void Draw(Graphics c,boolean isActive,boolean onRotation,int total_camino
 
       //  c.drawArc(x0-25, y0-75,50, 50, 0, 180);
 	//c.drawLine(this.ini.x0+difx*direcx,this.ini.y0+dify*direcx,this.fin.x0-difx*direcx,this.fin.y0-dify*direcx);
+        sx = this.ini.x0+difx*direcx;
+        sy =  this.ini.y0+dify*direcx;
+        fx=this.fin.x0-difx*direcx;
+        fy =  this.fin.y0-dify*direcx;
         drawArrowLine(c, this.ini.x0+difx*direcx, this.ini.y0+dify*direcx, this.fin.x0-difx*direcx, this.fin.y0-dify*direcx, 15, 5);
        
         c.drawString(a, this.fin.x0-difx*direcx-(10*a.length()*direcx)-10, this.fin.y0-dify*direcx-5);
@@ -113,12 +112,13 @@ public void Draw(Graphics c,boolean isActive,boolean onRotation,int total_camino
 }
 public boolean HitTest(int x,int y)
 {
-	int dx=x1-x0;
-	int dy=y1-y0;
+	int dx=fx-sx;
+	int dy=fy-sy;
 	int adx=Math.abs(dx);
 	int ady=Math.abs(dy);
-	x-=x0;
-	y-=y0;
+        
+	x-=sx;
+	y-=sy;
 	double nx,ny;
             nx=dx/Math.sqrt(dx*dx+dy*dy);
             ny=dy/Math.sqrt(dx*dx+dy*dy);

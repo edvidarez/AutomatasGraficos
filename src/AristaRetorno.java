@@ -49,17 +49,17 @@ public void Draw(Graphics c,boolean isActive,boolean onRotation,int caminos_tota
 	if(isActive==true)
 	{
 		c.setColor(Color.blue);
-		c.fillOval(x0-3, y0-3, 6, 6);
+		c.fillOval(ini.x0-3, ini.y0-53, 6, 6);
 	}
 	else
 		c.setColor(Color.black);
         
-          c.drawArc(x0-r, y0-r,50, 50, 0, 180);
+          c.drawArc(ini.x0-r, ini.y0-r-50,50, 50, 0, 180);
           
-        double dy =((double)this.y0-(double)this.ini.y0);
-        double dx =( (double)this.ini.x0-(double)(this.x0+r));
+        double dy =((double)this.ini.y0-(double)this.ini.y0);
+        double dx =( (double)this.ini.x0-(double)(this.ini.x0+r));
         double D = Math.sqrt(dx*dx + dy*dy);
-        double ang = Math.atan(dy/dx);        
+        double ang = Math.atan(2);        
       //  System.out.println(this.ini.x0+"nuevo "+(this.ini.x0+Math.cos(ang)*25));
         // double sin = dy/D, cos = dx/D;
         int difx = (int)(Math.cos(ang)*25);
@@ -67,19 +67,12 @@ public void Draw(Graphics c,boolean isActive,boolean onRotation,int caminos_tota
         System.out.println(ang);
         int direcx,direcy ;
         direcx=direcy=1;
-        if(this.ini.x0<x0+r)
-        {
-            direcx = 1;
-        }
-        else
-        {
-            direcx= -1;
-        }
-          c.drawLine(x0+r,y0,ini.x0+difx*direcx,ini.y0-dify*direcx);
-          drawArrowLine(c,x0-r,y0,ini.x0-difx*direcx,ini.y0-dify*direcx,15,5);
+       
+          c.drawLine(ini.x0+r,ini.y0-50,ini.x0+difx,ini.y0-dify);
+          drawArrowLine(c,ini.x0-r,ini.y0-50,ini.x0-difx,ini.y0-dify,15,5);
           
         
-        c.drawString(a, x0-(2*a.length()), y0-26);
+        c.drawString(a, ini.x0-(2*a.length()), ini.y0-50-26);
        }
 public void Move(int x, int y){
 	x0=x;
@@ -87,8 +80,8 @@ public void Move(int x, int y){
 }
 public boolean HitTest(int x, int y)
 {
-	x-=x0;
-	y-=y0;
+	x-=ini.x0;
+	y-=ini.y0-50;
 	if(x*x+y*y <25*25)
 		return true;
 	return false;
