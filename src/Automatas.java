@@ -132,7 +132,7 @@ public void mouseClicked(MouseEvent e) {
                                     {
                                         System.out.println(s+"Ya existe en el alfabeto");
                                     }
-                                    if(!isInState(s,ActiveShape))
+                                    if(!isInState(s,ActiveShape) || Main.notdet.isSelected())
                                     {
                                         if(finalLabel.length()>0)
                                         {
@@ -202,7 +202,7 @@ public void mouseClicked(MouseEvent e) {
 	}
 
 	public void mousePressed(MouseEvent e) {
-		System.out.println("cllick "+Main.det.isSelected());
+		//System.out.println("cllick "+Main.det.isSelected());
 		for(Shape S:Document){
 			if(S.HitTest(e.getX(), e.getY())){
 				bDragging=true;
@@ -218,6 +218,8 @@ public void mouseClicked(MouseEvent e) {
 		Last2x=e.getX();
                 Last2y=e.getY();
                 logo=false;
+                if(e.getButton() == MouseEvent.BUTTON3)
+                System.out.println("right click");
 //                Circle c=new Circle();
 //			c.x0=Last2x;
 //			c.y0=Last2y;

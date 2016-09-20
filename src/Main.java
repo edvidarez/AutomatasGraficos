@@ -153,11 +153,7 @@ public class Main {
                         {
                             if(S.type=="circle")
                             {
-                                if(S.caminos!=alfaSize)
-                                {
-                                   JOptionPane.showMessageDialog(Pad, "No esta completo el Autómata", "ERROR",JOptionPane.ERROR_MESSAGE);
-                                   error=true;
-                                }
+                               
                                 if(S.estadofinal)
                                 {
                                     estadosfin++;
@@ -166,6 +162,13 @@ public class Main {
                                 {
                                     estadosini++;
                                     estado_actual = S;
+                                }
+                                 if(S.caminos!=alfaSize)
+                                {
+                                    if(notdet.isSelected())
+                                        continue;
+                                   JOptionPane.showMessageDialog(Pad, "No esta completo el Autómata", "ERROR",JOptionPane.ERROR_MESSAGE);
+                                   error=true;
                                 }
                             }
                             
