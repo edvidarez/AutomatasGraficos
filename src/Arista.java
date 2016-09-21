@@ -15,7 +15,7 @@ private static final long serialVersionUID = 1L;
 public int x1,sx,fx;
 public int y1,sy,fy;
 
-public  String a = "String";
+
 Arista(Shape ini,Shape fin,String a)
 {   
     this.ini = ini;
@@ -25,6 +25,7 @@ Arista(Shape ini,Shape fin,String a)
     x1= this.fin.x0;
     y1=this.fin.y0;
     this.a=a;
+    this.type="arista";
     
 }
  private void drawArrowLine(Graphics g, int x1, int y1, int x2, int y2, int d, int h){

@@ -22,4 +22,5 @@ public class Shape implements Serializable{
         public int caminos=0;
         public Shape ini;
         public Shape fin;
+       
 }

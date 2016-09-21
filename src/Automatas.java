@@ -28,7 +28,7 @@ implements MouseListener, MouseMotionListener{
         int count_circles=1;
 	String File;
         boolean determinista =false;
-        ArrayList<String> alfabeto = new ArrayList<String>();
+        ArrayList<letra> alfabeto = new ArrayList<letra>();
 	boolean onRotation=false,logo=false,esperandoClick=false;
 	static String archivo="Guardado";
 	 FileInputStream FileInS;
@@ -81,15 +81,15 @@ public void mouseMoved(MouseEvent e) {
 		lastX=e.getX();
 		lastY=e.getY();
 	}
-public boolean isInAlfabet(String s)
+public letra isInAlfabet(String s)
 {
-    for(String a : alfabeto){
-        if( s.equals(a))
+    for(letra a : alfabeto){
+        if( s.equals(a.letra))
         {
-            return true;
+            return a;
         }
     }
-    return false;
+    return null;
 }
 public boolean isInState(String s,Shape c)
 {
@@ -106,6 +106,26 @@ public boolean isInState(String s,Shape c)
     }
     return false;
 }
+public void removeletter(String l)
+{
+    for(int i=0;i<alfabeto.size();i++)
+    {
+        if(alfabeto.get(i).letra.equals(l))
+        {
+            System.out.println("se encontro letra a eliminar ");
+            alfabeto.get(i).count--;
+            System.out.println("count = "+alfabeto.get(i).count);
+            if(alfabeto.get(i).count==0)
+            {
+                System.out.println("Se elimino"+alfabeto.get(i).letra);
+                alfabeto.remove(i);
+                return;
+            }
+        }
+        System.out.println("letra: "+l+" "+alfabeto.get(i).letra);
+    }
+     System.out.println("NO se encontro letra a eliminar");
+}
 public void mouseClicked(MouseEvent e) {
 		int i=0;
 		boolean flag=false;
@@ -120,16 +140,19 @@ public void mouseClicked(MouseEvent e) {
                             System.out.println("linea entre estados");
                             esperandoClick = false; 
                            String simbol = JOptionPane.showInputDialog("Ingresa el simbolo o simbolos separados por coma(sin espacios)");
+                           if(simbol==null)
+                               break;
                            String simbols[] = simbol.split(",");
                            String finalLabel = "";
                             for(String s : simbols){
-                                    if(!isInAlfabet(s))
+                                    if(isInAlfabet(s)==null)
                                     {
-                                        alfabeto.add(s);
+                                        alfabeto.add(new letra(s));
                                         System.out.println("se añadio: "+s);
                                     }
                                     else
                                     {
+                                        isInAlfabet(s).count++;
                                         System.out.println(s+"Ya existe en el alfabeto");
                                     }
                                     if(!isInState(s,ActiveShape) || Main.notdet.isSelected())
@@ -154,6 +177,7 @@ public void mouseClicked(MouseEvent e) {
                             {
                                  AristaRetorno ar = new AristaRetorno(ActiveShape,finalLabel); 
                                  ActiveShape.aristas.add(finalLabel);
+                                 ar.a=finalLabel;
                                  ActiveShape.aristas_shape.add(ar);
                                  Document.add(ar);
                             }
@@ -163,6 +187,7 @@ public void mouseClicked(MouseEvent e) {
                                 {
                                 Arista l = new Arista(ActiveShape,S,finalLabel);
                                 ActiveShape.aristas.add(finalLabel);
+                                l.a=finalLabel;
                                  ActiveShape.aristas_shape.add(l);
                                 Document.add(l);
                                 }
